@@ -22,8 +22,7 @@ export class Menu extends BaseScene {
         const buttonWidth = 300;
         const buttonHeight = 60;
         const gap = 30;
-        const startY =
-            this.app.screen.height / 2 - (((buttonHeight + gap) * this.scenes.length - gap) / 2);
+        const startY = (this.app.renderer.height * 0.5) - ((((buttonHeight + gap) * this.scenes.length) - gap) / 2);
 
         // Label
         const text = new PIXI.Text("Menu", {
@@ -46,7 +45,7 @@ export class Menu extends BaseScene {
                     fontSize: 28,
                     onClick: () => SceneManager.Instance.loadScene(scene.key),
                 });
-            btn.x = this.app.screen.width / 2 - buttonWidth / 2;
+            btn.x = this.app.renderer.width / 2 - buttonWidth / 2;
             btn.y = startY + i * (buttonHeight + gap);
             this.addChild(btn);
         });

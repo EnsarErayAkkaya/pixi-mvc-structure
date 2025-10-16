@@ -1,12 +1,14 @@
 import * as PIXI from "pixi.js";
 import { GameTimer } from "../../utils/timer/GameTimer";
 import type { StackController } from "./stack/StackController";
+import type { CardController } from "./card/CardController";
 
 export class AceOfShadowsAnimator {
     private _timer: GameTimer;
     private _stacks: StackController[];
     private _app: PIXI.Application;
     private _currentStack = 0;
+    private _animatingCards: CardController[] = [];
 
     constructor(app: PIXI.Application, stacks: StackController[]) {
 
@@ -26,23 +28,33 @@ export class AceOfShadowsAnimator {
             if (stack.hasCards()) {
 
                 const card = stack.popCard();
-                card?.setParent(stack.parent);
-                const { x: originalX, y: originalY } = stack.getNextCardPosition();
-                card?.setCardPosition(originalX, originalY);
+                if (card) {
+                    card?.setParent(stack.parent);
+                    const { x: originalX, y: originalY } = stack.getNextCardPosition();
+                    card?.setCardPosition(originalX, originalY);
 
-                const targetStackIndex = this._selectRandomStack(this._currentStack);
-                const targetStack = this._stacks[targetStackIndex];
+                    this._animatingCards.push(card);
+                    // assign zIndex so earlier animating cards are above later ones
+                    card.setZIndex(stack.cardCount);
 
-                let { x, y } = targetStack.getNextCardPosition();
+                    const targetStackIndex = this._selectRandomStack(this._currentStack);
+                    const targetStack = this._stacks[targetStackIndex];
 
-                card?.animateCard({
-                    to: { x, y },
-                    duration: 2,
-                    onComplete: () => {
-                        targetStack.pushCard(card);
-                    }
-                });
+                    let { x, y } = targetStack.getNextCardPosition();
 
+                    card?.animateCard({
+                        to: { x, y },
+                        duration: 2,
+                        onComplete: () => {
+                            targetStack.pushCard(card);
+                            const cardIndex = this._animatingCards.findIndex(s => s === card);
+
+                            if (cardIndex != -1) {
+                                this._animatingCards.splice(cardIndex, 1);
+                            }
+                        }
+                    });
+                }
                 return;
             }
             else {
@@ -53,6 +65,8 @@ export class AceOfShadowsAnimator {
 
     dispose() {
         this._app.ticker.remove(this._tick);
+
+        this._animatingCards.forEach(card => card.dispose());
     }
 
     private _selectRandomStack(except: number): number {
@@ -64,6 +78,6 @@ export class AceOfShadowsAnimator {
                 indexes.push(i);
         }
 
-        return indexes[Math.floor(Math.random() * (indexes.length - 1))];
+        return indexes[Math.floor(Math.random() * indexes.length)];
     }
 }

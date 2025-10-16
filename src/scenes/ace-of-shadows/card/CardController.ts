@@ -13,7 +13,7 @@ export class CardController {
 
     constructor(cardIndex: number) {
         this._cardModel = new CardModel(cardIndex);
-        this._cardView = new CardView(cardIndex);
+        this._cardView = new CardView(this._cardModel);
         this._cardAnimator = new CardAnimator(this._cardView);
     }
 
@@ -23,6 +23,10 @@ export class CardController {
 
     setZIndex(zIndex: number) {
         this._cardView.zIndex = zIndex
+    }
+
+    getZIndex(): number {
+        return this._cardView.zIndex
     }
 
     maximizeZIndex() {
@@ -35,5 +39,13 @@ export class CardController {
 
     setParent(container: PIXI.Container) {
         this._cardView.setParent(container);
+    }
+
+    getCardIndex() {
+        return this._cardModel.cardIndex
+    }
+
+    dispose() {
+        this._cardAnimator.dispose();
     }
 }

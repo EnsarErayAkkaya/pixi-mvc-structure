@@ -10,26 +10,31 @@ export interface JumpAnimConfig {
 
 export class CardAnimator {
     private _cardView: CardView;
+    private _scaleTimeline: gsap.core.Timeline | undefined = undefined;
+    private _positionTimeline: gsap.core.Timeline | undefined = undefined;
 
     constructor(cardView: CardView) {
         this._cardView = cardView;
     }
 
     JumpToPosition(config: JumpAnimConfig) {
+
+        this._cardView.toggleShadow(true);
+
         /// scale animation
-        const scaleTl = gsap.timeline();
+        this._scaleTimeline = gsap.timeline();
 
         const originalScaleX = this._cardView.scale.x;
         const originalScaleY = this._cardView.scale.y;
 
-        scaleTl
+        this._scaleTimeline
             .to(this._cardView, { pixi: { scaleX: originalScaleX * 3.5, scaleY: originalScaleY * 3.5 }, duration: config.duration * 0.7 })
             .to(this._cardView, { pixi: { scaleX: originalScaleX * 4.5, scaleY: originalScaleY * 4.5 }, duration: config.duration * 0.15 })
             .to(this._cardView, { pixi: { scaleX: originalScaleX, scaleY: originalScaleY }, duration: config.duration * 0.15 });
 
 
         /// position animation
-        const positionTl = gsap.timeline();
+        this._positionTimeline = gsap.timeline();
 
         const originalX = this._cardView.x;
         const originalY = this._cardView.y;
@@ -37,21 +42,23 @@ export class CardAnimator {
         const middleX = (config.to.x + originalX) * 0.5;
         const middleY = (config.to.y + originalY) * 0.5;
 
-        positionTl
-            .to(this._cardView, { pixi: { x: middleX, y: middleY }, ease: "back.out", duration: config.duration * 0.7 })
+        const yDist = Math.abs(originalY - config.to.y);
+
+        this._positionTimeline
+            .to(this._cardView, { pixi: { x: middleX, y: middleY }, ease: "sine.inOut", duration: config.duration * 0.7 })
+            .to(this._cardView, { pixi: { y: middleY - (yDist * 0.1) }, ease: "sine.inOut", duration: config.duration * 0.1 })
             .to(this._cardView, {
-                pixi: { x: config.to.x, y: config.to.y }, duration: config.duration * 0.2, delay: config.duration * 0.1,
+                pixi: { x: config.to.x, y: config.to.y }, duration: config.duration * 0.2,
                 onComplete: () => {
+                    this._cardView.toggleShadow(false);
                     config?.onComplete();
                     EffectManager.shakeCamera(20, 0.2);
                 }
             });
+    }
 
-
-        /// rotation animation
-
-        /*gsap.to(this._cardView, { pixi: { rotation: -20 }, ease: "back.out", duration: config.duration * 0.6 });
-        gsap.to(this._cardView, { pixi: { rotation: 10 }, ease: "sine.inOut", delay: config.duration * 0.6, duration: config.duration * 0.16 });
-        gsap.to(this._cardView, { pixi: { rotation: 0 }, ease: "sine.in", delay: config.duration * 0.76, duration: config.duration * 0.24 });*/
+    dispose() {
+        this._positionTimeline?.kill();
+        this._scaleTimeline?.kill();
     }
 }

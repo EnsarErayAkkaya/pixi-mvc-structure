@@ -12,6 +12,9 @@ export class StackController {
     get parent(): PIXI.Container {
         return this._stackView.parent;
     }
+    get cardCount(): number {
+        return this._stackModel.cards.length;
+    }
 
     constructor() {
         this._stackModel = new StackModel();

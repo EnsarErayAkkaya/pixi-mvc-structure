@@ -1,3 +1,8 @@
+/**
+ * CardView
+ * - Visual sprite representing a playing card. Created by CardController with a CardModel.
+ * - Usage: Do not instantiate directly in scenes; use CardController which wraps this view.
+ */
 import * as PIXI from "pixi.js";
 import { CardController } from "./CardController";
 import { DropShadowFilter } from 'pixi-filters';

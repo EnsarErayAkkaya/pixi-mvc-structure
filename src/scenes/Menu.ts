@@ -1,16 +1,24 @@
+/**
+ * Menu scene
+ * - Main menu that lists available scenes (Ace of Shadows, Magic Words, Phoenix Flame).
+ * - Usage: SceneManager.Instance.loadScene(Menu.Id) will create this scene.
+ */
 import * as PIXI from "pixi.js";
 import { BaseScene } from "../utils/scenes/BaseScene";
 import { Button } from "../ui/Button";
 import { SceneManager } from "../utils/scenes/SceneManager";
 import { AceOfShadows } from "./ace-of-shadows/AceOfShadows";
 import { MagicWords } from "./magic-words/MagicWords";
+import { PhoenixFlame } from "./phoenix-flame/PhoenixFlame";
+import { gsap } from "gsap";
 
 export class Menu extends BaseScene {
     static Id = "menu";
-    scenes = [
+
+    private scenes = [
         { name: "Ace of Shadows", key: AceOfShadows.Id },
         { name: "Magic Words", key: MagicWords.Id },
-        { name: "Phoenix Flame", key: "phoenixflame" },
+        { name: "Phoenix Flame", key: PhoenixFlame.Id },
     ];
 
     constructor(app: PIXI.Application) {
@@ -47,8 +55,17 @@ export class Menu extends BaseScene {
                 });
             btn.x = this.app.renderer.width / 2 - buttonWidth / 2;
             btn.y = startY + i * (buttonHeight + gap);
+
+            if (i % 2 == 0) {
+                gsap.from(btn, { pixi: { x: this.app.renderer.width, alpha: 0 }, duration: 1 });
+            }
+            else {
+                gsap.from(btn, { pixi: { x: 0, alpha: 0 }, duration: 1 });
+            }
             this.addChild(btn);
         });
+
+        gsap.from(text, { pixi: { y: 0, alpha: 0 }, duration: 1 });
 
         return Promise.resolve();
     }

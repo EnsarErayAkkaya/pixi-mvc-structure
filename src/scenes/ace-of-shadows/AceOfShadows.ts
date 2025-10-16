@@ -1,3 +1,8 @@
+/**
+ * AceOfShadows scene
+ * - Demonstrates a simple card-stack game where cards move between stacks via an animator.
+ * - Uses controllers/models/views for cards and stacks; the animator periodically moves cards.
+ */
 import * as PIXI from "pixi.js";
 import { BaseScene } from "../../utils/scenes/BaseScene";
 import { StackController } from "./stack/StackController";

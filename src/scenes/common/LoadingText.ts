@@ -1,3 +1,7 @@
+/**
+ * LoadingText
+ * - Small helper text used while loading remote data. Supports a LoadFailed animation.
+ */
 import * as PIXI from "pixi.js";
 import { gsap } from "gsap";
 
@@ -5,7 +9,7 @@ export class LoadingText extends PIXI.Text {
     constructor(text: string) {
         super(text, {
             fontFamily: "Arial",
-            fontSize: 50,
+            fontSize: 35,
             fill: "white",
             align: "center",
         });

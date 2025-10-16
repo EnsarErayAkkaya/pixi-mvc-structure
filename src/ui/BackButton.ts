@@ -1,3 +1,8 @@
+/**
+ * BackButton
+ * - Small UI control used to navigate back (calls provided onClick callback).
+ * - Usage: new BackButton(() => sceneManager.loadScene(Menu.Id))
+ */
 import * as PIXI from "pixi.js";
 
 export class BackButton extends PIXI.Container {

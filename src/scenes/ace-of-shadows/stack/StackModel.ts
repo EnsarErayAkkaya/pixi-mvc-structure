@@ -1,3 +1,7 @@
+/**
+ * StackModel
+ * - Simple data model holding a list of CardControllers representing a stack.
+ */
 import type { CardController } from "../card/CardController";
 
 export class StackModel {

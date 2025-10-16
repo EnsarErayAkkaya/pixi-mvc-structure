@@ -1,3 +1,8 @@
+/**
+ * MessageModel
+ * - Parses a raw message string into parts (text and emoji tokens) and stores the author (ChatUser).
+ * - Emoji tokens are expected in `{name}` format.
+ */
 import type { ChatUser } from "../chat/ChatModel";
 
 export class MessageModel {

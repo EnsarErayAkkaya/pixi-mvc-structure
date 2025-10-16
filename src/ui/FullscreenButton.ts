@@ -1,8 +1,9 @@
-import * as PIXI from "pixi.js";
-
 /**
- * A button that toggles fullscreen mode when clicked.
+ * FullscreenButton
+ * - Simple UI control that toggles the browser fullscreen state for the canvas.
+ * - Usage: new FullscreenButton(app) and add to a scene; it positions itself on resize.
  */
+import * as PIXI from "pixi.js";
 export class FullscreenButton extends PIXI.Container {
     private icon: PIXI.Graphics;
 

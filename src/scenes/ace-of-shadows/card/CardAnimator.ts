@@ -1,3 +1,9 @@
+/**
+ * CardAnimator
+ * - Handles animated movement of a card view (uses GSAP or manual tweens via PIXI in CardAnimator implementation).
+ * - Usage: new CardAnimator(cardView).Call JumpToPosition({ to:{x,y}, duration, onComplete }).
+ */
+
 import { EffectManager } from "../../../utils/effects/EffectManager";
 import type { CardView } from "./CardView";
 import { gsap } from "gsap";

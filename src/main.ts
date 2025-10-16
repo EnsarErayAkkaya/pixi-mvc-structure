@@ -1,8 +1,14 @@
+/**
+ * Application entry point
+ * - Creates the PIXI.Application, registers GSAP PixiPlugin and loads the initial scene (Menu).
+ * - Usage: run `npm run dev` and open the served page.
+ */
 import * as PIXI from 'pixi.js';
 import { SceneManager } from './utils/scenes/SceneManager';
 import { Menu } from './scenes/Menu';
 import { PixiPlugin } from "gsap/PixiPlugin";
 import { gsap } from 'gsap';
+import { FpsCounter } from './ui/FpsCounter';
 
 // pixi.js version 7.4.3
 
@@ -31,3 +37,7 @@ gsap.registerPlugin(PixiPlugin);
 
 // give the plugin a reference to the PIXI object
 PixiPlugin.registerPIXI(PIXI);
+
+const fpsCounter = new FpsCounter(app);
+
+app.stage.addChild(fpsCounter);

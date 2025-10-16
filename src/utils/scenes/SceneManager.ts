@@ -1,9 +1,15 @@
+/**
+ * SceneManager (singleton)
+ * - Responsible for creating and switching scenes. Scenes must extend BaseScene and expose a static Id.
+ * - Usage: SceneManager.createInstance(app); SceneManager.Instance.loadScene(Menu.Id);
+ */
 import * as PIXI from 'pixi.js';
 import { Logger } from "../logger/Logger";
 import type { BaseScene } from "./BaseScene";
 import { Menu } from '../../scenes/Menu';
 import { AceOfShadows } from '../../scenes/ace-of-shadows/AceOfShadows';
 import { MagicWords } from '../../scenes/magic-words/MagicWords';
+import { PhoenixFlame } from '../../scenes/phoenix-flame/PhoenixFlame';
 
 export class SceneManager {
     private app: PIXI.Application;
@@ -40,8 +46,8 @@ export class SceneManager {
         }
 
         this.currentScene = nextScene;
-        await nextScene.load();
         this.app.stage.addChild(this.currentScene);
+        await nextScene.load();
 
         Logger.Instance.log(`Scene "${sceneId}" loaded successfully.`);
     }
@@ -53,6 +59,8 @@ export class SceneManager {
             return new AceOfShadows(this.app);
         else if (sceneId == MagicWords.Id)
             return new MagicWords(this.app);
+        else if (sceneId == PhoenixFlame.Id)
+            return new PhoenixFlame(this.app);
 
         return null;
     }

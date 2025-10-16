@@ -1,3 +1,8 @@
+/**
+ * MessageView
+ * - Renders a single chat message bubble including avatar and message text.
+ * - Usage: created by MessageController; layouts text and emojis inside a bounded text area.
+ */
 import * as PIXI from "pixi.js";
 import type { MessageModel as MessageModel } from "./MessageModel";
 import type { ChatModel } from "../chat/ChatModel";
@@ -17,7 +22,7 @@ export class MessageView extends PIXI.Container {
 
         this._chatModel = chatModel;
         this._messageModel = messageModel;
-        
+
         const isMobile = (screen.width / screen.height) < 0.6;
         const messageWidth = isMobile ? maxWidth * 0.9 : maxWidth * 0.75;
 
@@ -99,12 +104,24 @@ export class MessageView extends PIXI.Container {
         for (const messagePart of this._messageModel.content) {
             if (messagePart.type === "text") {
 
-
                 const splitted = messagePart.content.split(" ");
-                for (let i = 0; i < splitted.length; i++) {
 
-                    const word = splitted[i];
-                    const text = new PIXI.Text(word, messageStyle);
+                const wordAmountInText = maxWidth > 400 ? 2 : 1
+                for (let i = 0; i < splitted.length; i += wordAmountInText) {
+
+                    let words = "";
+                    let currentWordAmount = wordAmountInText;
+                    for (let j = 0; j < currentWordAmount; j++) {
+                        if (i + j < splitted.length) {
+                            const word = splitted[i + j]
+                            words += j == 0 ? word : " " + word;
+
+                            if (word === " " || word === "")
+                                currentWordAmount++
+                        }
+                    }
+
+                    const text = new PIXI.Text(words, messageStyle);
 
                     placeText(text);
 

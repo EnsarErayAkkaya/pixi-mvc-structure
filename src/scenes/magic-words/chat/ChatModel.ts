@@ -1,3 +1,8 @@
+/**
+ * ChatModel
+ * - Holds chat data (dialogue, avatars, emojis) and helpers to query them.
+ * - Construct with parsed API data (ChatData).
+ */
 export class ChatModel {
     private _chatData: ChatData;
 

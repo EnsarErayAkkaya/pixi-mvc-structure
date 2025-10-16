@@ -1,3 +1,8 @@
+/**
+ * BaseScene
+ * - Extend this class for every app scene. Implement async load() and unload() for resource setup/teardown.
+ * - The constructor adds the scene to the stage; use addBackButton()/addFullscreenButton() helpers when needed.
+ */
 import * as PIXI from "pixi.js";
 import { BackButton } from "../../ui/BackButton";
 import { FullscreenButton } from "../../ui/FullscreenButton";

@@ -1,3 +1,7 @@
+/**
+ * ChatController
+ * - Builds message MVC components from ChatModel and lays them out in ChatView.
+ */
 import { MessageController } from "../message/MessageController";
 import { MessageModel } from "../message/MessageModel";
 import { ChatModel } from "./ChatModel";

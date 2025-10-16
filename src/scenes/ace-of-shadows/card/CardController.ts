@@ -1,3 +1,8 @@
+/**
+ * CardController
+ * - Controller that ties CardModel and CardView and exposes convenience methods (position, zIndex, animate).
+ * - Usage: new CardController(index), then setParent(container), setCardPosition(x,y), animateCard(...)
+ */
 import { CardAnimator, type JumpAnimConfig } from "./CardAnimator";
 import { CardModel } from "./CardModel";
 import { CardView } from "./CardView";

@@ -1,3 +1,9 @@
+/**
+ * Button UI component
+ * - Simple PIXI container that displays a rounded rectangle and centered label.
+ * - Usage: new Button(text, width, height, { onClick: () => {} }) and add to a scene/container.
+ * - Interactive: emits pointer events and supports hover/click visuals.
+ */
 import * as PIXI from "pixi.js";
 
 export class Button extends PIXI.Container {

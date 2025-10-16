@@ -1,3 +1,8 @@
+/**
+ * StackController
+ * - Controller managing the logical stack of cards and its view.
+ * - Usage: create StackController, call setParent(scene), setStackPosition(x,y), populate(n).
+ */
 import { CardController } from "../card/CardController";
 import { StackModel } from "./StackModel";
 import { StackView } from "./StackView";

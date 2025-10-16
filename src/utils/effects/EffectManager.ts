@@ -1,3 +1,8 @@
+/**
+ * EffectManager
+ * - Small helper for global visual effects (camera shake, etc.).
+ * - Usage: EffectManager.shakeCamera(intensity, duration)
+ */
 import { SceneManager } from '../scenes/SceneManager';
 import { gsap } from "gsap";
 

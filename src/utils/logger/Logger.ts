@@ -1,3 +1,8 @@
+/**
+ * Logger singleton
+ * - Small wrapper around console.log/warn used across the project.
+ * - Usage: Logger.Instance.log('message')
+ */
 export class Logger {
     // SINGLETON
     private static _instance: Logger;

@@ -1,3 +1,7 @@
+/**
+ * Small HTTP client wrapper
+ * - Usage: Client.fetch<T>(url, options) returns ApiResponse<T> with data or errorMessages.
+ */
 export interface ApiResponse<T> {
     data: T | null;
     errorMessages: string[];

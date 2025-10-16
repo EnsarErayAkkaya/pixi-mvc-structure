@@ -1,3 +1,7 @@
+/**
+ * MessageController
+ * - MVC controller that creates MessageView from MessageModel and handles positioning/parenting.
+ */
 import * as PIXI from "pixi.js";
 
 import { MessageModel } from "./MessageModel";

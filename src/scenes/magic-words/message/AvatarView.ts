@@ -1,3 +1,8 @@
+/**
+ * AvatarView
+ * - Renders a circular avatar using provided ChatUser.url. Used inside MessageView.
+ * - Usage: new AvatarView(size, chatUser)
+ */
 import * as PIXI from "pixi.js";
 import type { ChatUser } from "../chat/ChatModel";
 

@@ -1,3 +1,8 @@
+/**
+ * GameTimer
+ * - Small utility to accumulate time and trigger callbacks at an interval (cooldown style).
+ * - Usage: new GameTimer(seconds); call update(dt, () => { ... }) each frame.
+ */
 export class GameTimer {
     private _maxTime: number;
     private _time: number;

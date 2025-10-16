@@ -1,3 +1,8 @@
+/**
+ * ChatView
+ * - Scrollable chat container with inertial dragging and wheel support.
+ * - Usage: const view = new ChatView(width, height); add messages to view.scrollContainer.
+ */
 import * as PIXI from "pixi.js";
 
 export class ChatView extends PIXI.Container {

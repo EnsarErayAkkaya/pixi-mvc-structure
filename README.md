@@ -43,7 +43,6 @@ npm run preview
 ```
 
 ## Notes for developers
-- TypeScript is strict; pay attention to `tsconfig.json` settings like `noUnusedLocals` and `noUnusedParameters`.
 - Scenes should extend `BaseScene` and provide `load()` / `unload()` async methods.
 - Scene switching is handled by `SceneManager.createInstance(app).loadScene(sceneId)`.
 
@@ -55,10 +54,3 @@ npm run preview
 ## Testing / debugging
 - Use the browser devtools for rendering/logging errors (Logger prints to console).
 - For visual issues, start `npm run dev` and inspect the canvas size and renderer settings in `main.ts`.
-
-## Contributing
-- Keep changes small and focused.
-- Preserve architecture patterns (scene-per-feature, controller/model/view split where used).
-
-If you'd like, I can also add inline top-of-file comments describing the purpose and usage of each source file — tell me to proceed and I will annotate files in batches.
-
